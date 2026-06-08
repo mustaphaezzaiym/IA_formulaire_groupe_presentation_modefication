@@ -3,803 +3,896 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modifier mon inscription — Présentations de projets doctoraux</title>
+<title>Dépôt de fichiers — Présentations Doctorales 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  /* ── DESIGN TOKENS (identiques au formulaire d'inscription) ── */
   :root {
-    --ink: #0f0e0c;
-    --paper: #f7f4ee;
-    --accent: #1a3a2a;
-    --accent-light: #2d6648;
-    --rule: #c8bfaa;
-    --muted: #7a7060;
-    --danger: #8b1a1a;
-    --warn: #8b5a2b;
-    --field-bg: #ffffff;
-    --section-bg: #eeead9;
-    --warn-bg: #fdf3e7;
+    --ink:         #0f0e0c;
+    --paper:       #f7f4ee;
+    --accent:      #1a3a2a;
+    --accent-light:#2d6648;
+    --rule:        #c8bfaa;
+    --muted:       #7a7060;
+    --danger:      #8b1a1a;
+    --field-bg:    #ffffff;
+    --section-bg:  #eeead9;
+    --gold:        #8b5a2b;
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--paper); color: var(--ink); font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; line-height: 1.6; min-height: 100vh; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
 
-  /* ── HEADER ── */
-  .masthead { background: var(--accent); color: var(--paper); padding: 3rem 2rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
-  .masthead::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.04) 39px, rgba(255,255,255,0.04) 40px); }
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--accent);
+    color: var(--paper);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent, transparent 39px,
+      rgba(255,255,255,0.04) 39px, rgba(255,255,255,0.04) 40px
+    );
+  }
   .masthead-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
-  .masthead-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #8fbb9f; margin-bottom: 0.75rem; }
-  .masthead h1 { font-family: 'Playfair Display', serif; font-size: clamp(20px, 4vw, 32px); font-weight: 600; line-height: 1.2; color: #f7f4ee; margin-bottom: 1rem; }
-  .masthead-meta { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.25rem; }
-  .meta-pill { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 2px; padding: 0.3rem 0.8rem; font-size: 12px; font-family: 'IBM Plex Mono', monospace; color: #c8e6d4; }
+  .masthead-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8fbb9f;
+    margin-bottom: 0.75rem;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 600;
+    line-height: 1.2;
+    color: #f7f4ee;
+    margin-bottom: 1rem;
+  }
+  .masthead-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+  }
+  .meta-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    padding: 0.3rem 0.8rem;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: #c8e6d4;
+  }
 
-  /* ── WARN BAR ── */
-  .warn-bar { background: #3d2006; padding: 0.75rem 2rem; }
-  .warn-bar-inner { max-width: 720px; margin: 0 auto; display: flex; gap: 0.75rem; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #f5c07a; }
-  .warn-bar-inner span { opacity: 0.7; }
+  /* ── MAIN LAYOUT ── */
+  .form-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
 
-  /* ── MAIN ── */
-  .form-wrap { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  /* ── NOTICE BOX ── */
+  .notice-box {
+    background: var(--section-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .notice-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .notice-list { list-style: none; }
+  .notice-list li {
+    font-size: 13px;
+    padding: 0.3rem 0;
+    display: flex;
+    gap: 0.6rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .notice-list li:last-child { border-bottom: none; }
+  .notice-list .icon { color: var(--accent-light); flex-shrink: 0; }
 
-  /* ── ÉTAPE 0 : saisie de l'ID ── */
-  .id-gate { background: var(--field-bg); border: 1px solid var(--rule); padding: 2rem; margin-bottom: 0; }
-  .id-gate-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--ink); }
-  .id-gate-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
-  .id-gate-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 400; }
-  .id-input-row { display: flex; gap: 0.75rem; align-items: flex-end; }
-  .id-input-row input { flex: 1; height: 46px; padding: 0 14px; background: var(--paper); border: 1.5px solid var(--rule); font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: var(--ink); letter-spacing: 0.05em; outline: none; transition: border-color 0.2s; }
-  .id-input-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,58,42,0.08); }
-  .id-input-row input.error { border-color: var(--danger); }
-  .id-input-row input::placeholder { color: #bbb3a0; font-size: 13px; letter-spacing: 0; }
-  .btn-load { height: 46px; padding: 0 1.5rem; background: var(--accent); border: 1.5px solid var(--accent); color: #f7f4ee; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
-  .btn-load:hover { background: var(--accent-light); }
-  .btn-load:disabled { opacity: 0.6; cursor: not-allowed; }
-  .id-hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
-  .id-error { font-size: 13px; color: var(--danger); background: #fdf0f0; border: 1px solid #f5c0c0; padding: 0.6rem 0.9rem; margin-top: 0.75rem; display: none; }
+  /* ── CARD ── */
+  .card {
+    background: var(--field-bg);
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .card-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .card-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+  }
 
-  /* ── GROUPE CHARGÉ — badge identité ── */
-  .group-identity { display: none; background: var(--section-bg); border: 1px solid var(--rule); border-left: 4px solid var(--accent); padding: 1rem 1.25rem; margin-bottom: 1.75rem; }
-  .group-identity.visible { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .group-id-badge { font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: var(--accent); color: #f7f4ee; padding: 0.25rem 0.7rem; flex-shrink: 0; }
-  .group-id-name { font-weight: 500; font-size: 14px; }
-  .group-id-status { margin-left: auto; font-size: 12px; font-family: 'IBM Plex Mono', monospace; color: var(--accent-light); }
-
-  /* ── PROGRESS ── */
-  .progress-track { display: none; align-items: center; margin-bottom: 2.5rem; padding: 1.25rem 1.5rem; background: var(--field-bg); border: 1px solid var(--rule); }
-  .progress-track.visible { display: flex; }
-  .progress-step { display: flex; align-items: center; flex: 1; }
-  .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--section-bg); border: 1.5px solid var(--rule); display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: var(--muted); flex-shrink: 0; transition: all 0.3s; }
-  .step-num.active { background: var(--warn); border-color: var(--warn); color: #f7f4ee; }
-  .step-num.done { background: var(--accent-light); border-color: var(--accent-light); color: #f7f4ee; }
-  .step-label { font-size: 11px; color: var(--muted); margin-left: 8px; white-space: nowrap; }
-  .step-label.active { color: var(--warn); font-weight: 500; }
-  .step-line { flex: 1; height: 1px; background: var(--rule); margin: 0 8px; }
-
-  /* ── SECTIONS ── */
-  .section { display: none; animation: fadeIn 0.3s ease; }
-  .section.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--ink); }
-  .section-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 400; }
-
-  /* ── FIELDS ── */
+  /* ── FORM FIELDS ── */
   .field { margin-bottom: 1.25rem; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
-  label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
   label .req { color: var(--danger); margin-left: 3px; }
-  input[type="text"], input[type="email"], select { width: 100%; height: 42px; padding: 0 12px; background: var(--field-bg); border: 1px solid var(--rule); border-radius: 0; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; color: var(--ink); outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none; }
-  input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,58,42,0.08); }
-  input.error, select.error { border-color: var(--danger); }
-  input::placeholder { color: #bbb3a0; }
-  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7060' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
   .field-hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
   .field-error { font-size: 12px; color: var(--danger); margin-top: 5px; display: none; }
 
-  /* ── MEMBERS ── */
-  .members-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .member-card { background: var(--field-bg); border: 1px solid var(--rule); padding: 1rem; }
-  .member-card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem; }
-  .member-badge { width: 22px; height: 22px; background: var(--accent); color: #f7f4ee; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; flex-shrink: 0; }
-  .member-label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
-  .member-req { font-size: 10px; color: var(--danger); margin-left: auto; }
+  select {
+    width: 100%;
+    height: 42px;
+    padding: 0 36px 0 12px;
+    background: var(--field-bg);
+    border: 1px solid var(--rule);
+    border-radius: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7060' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    cursor: pointer;
+  }
+  select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,58,42,0.08); }
+  select:disabled { opacity: 0.5; cursor: not-allowed; background-color: var(--section-bg); }
+  select option { color: var(--ink); background: #fff; }
+  select option:disabled { color: var(--muted); font-style: italic; }
 
-  /* ── DATE SELECTION ── */
-  .date-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
-  .date-opt { border: 1.5px solid var(--rule); padding: 1rem; cursor: pointer; text-align: center; transition: all 0.2s; background: var(--field-bg); position: relative; }
-  .date-opt:hover:not(.disabled) { border-color: var(--accent-light); }
-  .date-opt.selected-first { border-color: var(--accent); background: rgba(26,58,42,0.05); }
-  .date-opt.selected-second { border-color: var(--warn); background: rgba(139,90,43,0.05); }
-  .date-opt.disabled { opacity: 0.45; cursor: not-allowed; background: #f0ece0; }
-  .date-opt .date-day { font-family: 'IBM Plex Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1; }
-  .date-opt .date-month { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 4px; }
-  .date-opt .date-spots { font-size: 11px; color: var(--muted); margin-top: 6px; font-family: 'IBM Plex Mono', monospace; }
-  .date-opt .date-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: 10px; padding: 2px 8px; border-radius: 2px; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
-  .date-badge.first { background: var(--accent); color: #f7f4ee; }
-  .date-badge.second { background: var(--warn); color: #f7f4ee; }
-  .date-badge.full-badge { background: var(--danger); color: #f7f4ee; }
-  .date-badge.current-badge { background: #4a6741; color: #f7f4ee; }
-  .date-legend { display: flex; gap: 1.5rem; margin-top: 1rem; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
-  .legend-item { display: flex; align-items: center; gap: 0.4rem; }
-  .legend-swatch { width: 12px; height: 12px; border: 1.5px solid; }
-  .legend-swatch.first { border-color: var(--accent); background: rgba(26,58,42,0.1); }
-  .legend-swatch.second { border-color: var(--warn); background: rgba(139,90,43,0.1); }
+  /* ── GROUP INFO BADGE ── */
+  .group-badge {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(26,58,42,0.06);
+    border-left: 3px solid var(--accent-light);
+    font-size: 13px;
+    color: var(--accent);
+    line-height: 1.7;
+  }
+  .group-badge.visible { display: block; }
+  .group-badge strong { font-weight: 600; }
 
-  /* ── NAVIGATION ── */
-  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
-  .btn { padding: 0.65rem 1.75rem; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; border: 1.5px solid; border-radius: 0; transition: all 0.2s; }
-  .btn-ghost { background: transparent; border-color: var(--rule); color: var(--muted); }
-  .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
-  .btn-primary { background: var(--accent); border-color: var(--accent); color: #f7f4ee; }
-  .btn-primary:hover { background: var(--accent-light); border-color: var(--accent-light); }
-  .btn-warn { background: var(--warn); border-color: var(--warn); color: #f7f4ee; padding: 0.75rem 2.5rem; font-size: 14px; }
-  .btn-warn:hover:not(:disabled) { background: #a0692f; border-color: #a0692f; }
-  .btn-warn:disabled { opacity: 0.6; cursor: not-allowed; }
+  /* Skeleton loader */
+  .skeleton {
+    height: 42px;
+    background: linear-gradient(90deg,
+      var(--section-bg) 25%,
+      #e3dece 50%,
+      var(--section-bg) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border: 1px solid var(--rule);
+  }
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
 
-  /* ── RECAP ── */
-  .recap-box { margin-bottom: 1.5rem; background: var(--field-bg); border: 1px solid var(--rule); padding: 1.25rem 1.5rem; }
-  .recap-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
-  .recap-row { display: flex; justify-content: space-between; padding: 0.35rem 0; border-bottom: 1px solid #eee; font-size: 13px; }
-  .recap-row:last-child { border-bottom: none; }
-  .recap-key { color: var(--muted); }
-  .recap-val { font-weight: 500; font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
-  .recap-val.changed { color: var(--warn); }
+  /* ── DROP ZONE ── */
+  .drop-zone {
+    border: 2px dashed var(--rule);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+  }
+  .drop-zone:hover,
+  .drop-zone.dragover {
+    border-color: var(--accent-light);
+    background: rgba(26,58,42,0.03);
+  }
+  .drop-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+  .drop-icon {
+    display: block;
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: var(--muted);
+  }
+  .drop-main {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .drop-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+  }
 
-  /* ── DIFF BADGE ── */
-  .diff-pill { display: inline-block; font-size: 10px; font-family: 'IBM Plex Mono', monospace; background: #fdf3e7; border: 1px solid #e0b080; color: var(--warn); padding: 1px 6px; margin-left: 6px; vertical-align: middle; }
+  /* ── FILE PREVIEW ── */
+  .file-preview {
+    display: none;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(26,58,42,0.06);
+    border-left: 3px solid var(--accent-light);
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+  }
+  .file-preview.visible { display: flex; }
+  .file-preview .file-name { flex: 1; font-weight: 500; word-break: break-all; color: var(--accent); }
+  .file-preview .file-size { color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 12px; white-space: nowrap; }
+  .btn-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--danger);
+    font-size: 14px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    transition: background 0.15s;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .btn-remove:hover { background: rgba(139,26,26,0.08); }
 
-  /* ── NOTICE ── */
-  .notice { background: rgba(26,58,42,0.06); border: 1px solid rgba(26,58,42,0.2); padding: 0.75rem 1rem; font-size: 13px; color: var(--accent); margin-bottom: 1.25rem; display: flex; gap: 0.5rem; align-items: flex-start; }
-  .notice-warn { background: var(--warn-bg); border: 1px solid #e0b080; padding: 0.75rem 1rem; font-size: 13px; color: #5a3510; margin-bottom: 1.25rem; display: flex; gap: 0.5rem; align-items: flex-start; }
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    display: none;
+    margin-top: 14px;
+  }
+  .progress-wrap.visible { display: block; }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .progress-track-bar {
+    height: 4px;
+    background: var(--section-bg);
+    border: 1px solid var(--rule);
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-light);
+    transition: width 0.35s ease;
+  }
 
-  /* ── LOADING / SUCCESS / ERROR ── */
-  .submitting-overlay { display: none; text-align: center; padding: 2rem; }
-  .spinner { width: 36px; height: 36px; border: 3px solid var(--rule); border-top-color: var(--warn); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
-  .spinner.green { border-top-color: var(--accent); }
+  /* ── NAVIGATION ROW ── */
+  .nav-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    padding: 0.65rem 1.75rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid;
+    border-radius: 0;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #f7f4ee;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--accent-light);
+    border-color: var(--accent-light);
+  }
+  .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* ── ALERTS ── */
+  .alert {
+    display: none;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    font-size: 14px;
+    border-left: 3px solid;
+    line-height: 1.6;
+  }
+  .alert.visible { display: block; }
+  .alert a { color: inherit; text-decoration: underline; }
+
+  .alert-success {
+    background: rgba(26,58,42,0.07);
+    border-color: var(--accent-light);
+    color: #085041;
+  }
+  .alert-error {
+    background: rgba(139,26,26,0.06);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+  .alert-info {
+    background: rgba(139,90,43,0.07);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ── SUCCESS PANEL ── */
+  .success-panel {
+    display: none;
+    background: var(--field-bg);
+    border: 1px solid var(--rule);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .success-panel.visible { display: block; }
+  .success-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: var(--accent);
+    color: #f7f4ee;
+    font-size: 28px;
+    border-radius: 50%;
+    margin-bottom: 1.25rem;
+  }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .success-sub { font-size: 14px; color: var(--muted); margin-bottom: 2rem; }
+  .recap-table { width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 1.5rem; }
+  .recap-table tr { border-bottom: 1px solid var(--rule); }
+  .recap-table td { padding: 0.6rem 0.75rem; font-size: 13px; }
+  .recap-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    width: 40%;
+  }
+  .success-link {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    background: var(--accent);
+    color: #f7f4ee;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid var(--accent);
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+  .success-link:hover { background: var(--accent-light); border-color: var(--accent-light); }
+
+  /* ── LOADING SPINNER ── */
+  .submitting-overlay {
+    display: none;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--field-bg);
+    border: 1px solid var(--rule);
+  }
+  .submitting-overlay.visible { display: block; }
+  .spinner {
+    display: inline-block;
+    width: 36px; height: 36px;
+    border: 3px solid var(--rule);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+    margin-bottom: 1rem;
+  }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .success-screen { display: none; text-align: center; padding: 3rem 1rem; }
-  .success-icon { width: 60px; height: 60px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 26px; color: #f7f4ee; }
-  .success-screen h2 { font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 0.75rem; }
-  .success-screen p { color: var(--muted); font-size: 14px; max-width: 440px; margin: 0 auto 1.5rem; }
-  .error-banner { display: none; background: #fcebeb; border: 1px solid #f09595; padding: 0.75rem 1rem; font-size: 13px; color: #791f1f; margin-top: 1rem; }
+  .submitting-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 
-  /* ── READONLY FIELDS ── */
-  .field-readonly { background: var(--section-bg); border: 1px dashed var(--rule); padding: 0.55rem 0.85rem; font-size: 14px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 13px; min-height: 42px; display: flex; align-items: center; }
-  .field-readonly-label { font-size: 10px; font-family: 'IBM Plex Mono', monospace; color: var(--muted); margin-left: 6px; opacity: 0.7; }
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    letter-spacing: 0.05em;
+  }
 
-  @media (max-width: 580px) {
-    .field-row, .members-grid, .date-options { grid-template-columns: 1fr; }
-    .progress-track { display: none !important; }
-    .id-input-row { flex-direction: column; }
-    .btn-load { width: 100%; height: 42px; }
+  @media (max-width: 520px) {
+    .card { padding: 1.5rem 1rem; }
+    .drop-zone { padding: 1.75rem 1rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
-<div class="masthead">
+<!-- ── MASTHEAD ── -->
+<header class="masthead">
   <div class="masthead-inner">
-    <div class="masthead-eyebrow">Module: Introduction à l'intelligence artificielle et à la propriété intellectuelle</div>
-    <h1>Modifier mon inscription<br><span style="font-size:0.7em;opacity:0.75;font-weight:400">Présentations de projets doctoraux 2026</span></h1>
+    <div class="masthead-eyebrow">Doctorat — 2026</div>
+    <h1>Portail de Dépôt<br>des Présentations</h1>
     <div class="masthead-meta">
-      <span class="meta-pill">Modification via ID unique</span>
-      <span class="meta-pill">Données pré-remplies</span>
-      <span class="meta-pill">Soumission sécurisée</span>
+      <span class="meta-pill">📁 PDF · PPT · PPTX · DOC · DOCX</span>
+      <span class="meta-pill">⚖ Max 10 MB</span>
+      <span class="meta-pill">🔒 Une soumission par groupe</span>
     </div>
   </div>
-</div>
+</header>
 
-<!-- ══ BARRE D'AVERTISSEMENT ══ -->
-<div class="warn-bar">
-  <div class="warn-bar-inner">
-    <span>⚠</span>
-    <span>Votre identifiant unique (GRP-xxxx) vous a été envoyé par e-mail lors de l'inscription. Conservez-le précieusement.</span>
+<!-- ── MAIN ── -->
+<main class="form-wrap">
+
+  <!-- Notice -->
+  <div class="notice-box">
+    <div class="notice-title">Instructions</div>
+    <ul class="notice-list">
+      <li><span class="icon">→</span> Sélectionnez votre groupe dans la liste déroulante</li>
+      <li><span class="icon">→</span> Les groupes ayant déjà soumis sont signalés et désactivés</li>
+      <li><span class="icon">→</span> Déposez votre fichier de présentation (formats acceptés ci-dessus)</li>
+      <li><span class="icon">→</span> Une confirmation par e-mail vous sera envoyée après soumission</li>
+    </ul>
   </div>
-</div>
 
-<div class="form-wrap">
+  <!-- FORM (masqué après succès) -->
+  <div id="form-area">
 
-  <!-- ══ ÉTAPE 0 : SAISIE DE L'ID ══ -->
-  <div class="id-gate" id="id-gate">
-    <div class="id-gate-header">
-      <span class="id-gate-num">Étape préalable</span>
-      <h2 class="id-gate-title">Identifiez votre groupe</h2>
-    </div>
-    <div class="notice">ℹ Saisissez l'identifiant unique reçu par e-mail lors de votre inscription. Les données de votre groupe seront chargées automatiquement.</div>
-    <div class="field" style="margin-bottom:0.5rem">
-      <label>Identifiant du groupe <span class="req">*</span></label>
-      <div class="id-input-row">
-        <input type="text" id="input-id" placeholder="GRP-1748000000000" autocomplete="off" spellcheck="false" />
-        <button class="btn-load" id="btn-load" onclick="loadGroupe()">Charger mes données →</button>
+    <!-- STEP 1 — GROUPE -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-num">Étape 01</span>
+        <span class="card-title">Sélection du groupe</span>
       </div>
-      <div class="id-hint">Format : GRP- suivi de chiffres. Exemple : GRP-1748123456789</div>
-    </div>
-    <div class="id-error" id="id-error">Identifiant non reconnu. Vérifiez l'e-mail de confirmation ou contactez l'organisateur.</div>
-    <div class="submitting-overlay" id="loading-id" style="padding:1.5rem 0">
-      <div class="spinner green"></div>
-      <p style="color:var(--muted);font-size:13px">Recherche du groupe en cours…</p>
-    </div>
-  </div>
 
-  <!-- ══ BADGE IDENTITÉ GROUPE (affiché une fois chargé) ══ -->
-  <div class="group-identity" id="group-identity">
-    <div class="group-id-badge" id="gi-id">GRP-xxxx</div>
-    <div class="group-id-name" id="gi-name">Groupe —</div>
-    <div class="group-id-status" id="gi-status">Inscrit</div>
-  </div>
-
-  <!-- ══ BARRE DE PROGRESSION (cachée jusqu'au chargement) ══ -->
-  <div class="progress-track" id="progress-track">
-    <div class="progress-step"><div class="step-num active" id="step-n1">1</div><span class="step-label active" id="step-l1">Groupe</span></div>
-    <div class="step-line"></div>
-    <div class="progress-step"><div class="step-num" id="step-n2">2</div><span class="step-label" id="step-l2">Membres</span></div>
-    <div class="step-line"></div>
-    <div class="progress-step"><div class="step-num" id="step-n3">3</div><span class="step-label" id="step-l3">Présentation</span></div>
-    <div class="step-line"></div>
-    <div class="progress-step"><div class="step-num" id="step-n4">4</div><span class="step-label" id="step-l4">Dates</span></div>
-    <div class="step-line"></div>
-    <div class="progress-step"><div class="step-num" id="step-n5">5</div><span class="step-label" id="step-l5">Confirmer</span></div>
-  </div>
-
-  <!-- ══ SECTION 1 : Informations du groupe ══ -->
-  <div class="section" id="sec1">
-    <div class="section-header"><span class="section-num">01 / 05</span><h2 class="section-title">Informations du groupe</h2></div>
-    <div class="notice-warn">✎ Les champs grisés (nom du groupe, horodatage) ne peuvent pas être modifiés.</div>
-
-    <div class="field-row">
       <div class="field">
-        <label>Nom du groupe</label>
-        <div class="field-readonly" id="ro-nom-groupe">—<span class="field-readonly-label">non modifiable</span></div>
+        <label for="group-select">Votre groupe doctoral <span class="req">*</span></label>
+        <div id="group-skeleton" class="skeleton"></div>
+        <select id="group-select" style="display:none;" aria-label="Sélectionner votre groupe">
+          <option value="" disabled selected>— Choisissez votre groupe —</option>
+        </select>
+        <div class="field-error" id="err-group">Veuillez sélectionner votre groupe.</div>
+        <div class="field-hint">Les groupes marqués ✓ ont déjà effectué leur dépôt.</div>
       </div>
+
+      <div class="group-badge" id="group-badge"></div>
+    </div>
+
+    <!-- STEP 2 — FICHIER -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-num">Étape 02</span>
+        <span class="card-title">Fichier de présentation</span>
+      </div>
+
       <div class="field">
-        <label>Date d'inscription</label>
-        <div class="field-readonly" id="ro-horodatage" style="font-size:11px">—<span class="field-readonly-label">non modifiable</span></div>
+        <label>Document à déposer <span class="req">*</span></label>
+        <div class="drop-zone" id="drop-zone">
+          <input type="file" id="file-input" accept=".pdf,.ppt,.pptx,.doc,.docx" />
+          <span class="drop-icon">📄</span>
+          <div class="drop-main">Glissez votre fichier ici ou cliquez pour parcourir</div>
+          <div class="drop-sub">PDF · PPT · PPTX · DOC · DOCX — max 10 MB</div>
+        </div>
+        <div class="file-preview" id="file-preview">
+          <span id="preview-name" class="file-name"></span>
+          <span id="preview-size" class="file-size"></span>
+          <button class="btn-remove" id="remove-file" type="button" title="Supprimer">✕</button>
+        </div>
+        <div class="field-error" id="err-file">Veuillez choisir un fichier valide.</div>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-wrap" id="progress-wrap">
+        <div class="progress-meta">
+          <span id="progress-label">Envoi en cours…</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-track-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Alerts -->
+      <div class="alert alert-error"   id="alert-error"></div>
+      <div class="alert alert-info"    id="alert-info"></div>
+
+      <!-- Nav -->
+      <div class="nav-row">
+        <button class="btn btn-primary" id="submit-btn" disabled type="button">
+          Déposer le fichier →
+        </button>
       </div>
     </div>
 
-    <div class="field-row">
-      <div class="field">
-        <label>Nom du responsable <span class="req">*</span></label>
-        <input type="text" id="nom_resp" placeholder="Nom et prénom" />
-        <div class="field-error" id="err-nom_resp">Ce champ est obligatoire.</div>
-      </div>
-      <div class="field">
-        <label>E-mail du responsable <span class="req">*</span></label>
-        <input type="email" id="email_resp" placeholder="prenom.nom@univ.ma" />
-        <div class="field-error" id="err-email_resp">Adresse e-mail invalide.</div>
-      </div>
-    </div>
-    <div class="nav-row"><span></span><button class="btn btn-primary" onclick="goTo(2)">Suivant →</button></div>
-  </div>
+  </div><!-- /form-area -->
 
-  <!-- ══ SECTION 2 : Membres ══ -->
-  <div class="section" id="sec2">
-    <div class="section-header"><span class="section-num">02 / 05</span><h2 class="section-title">Membres du groupe</h2></div>
-    <div class="notice">ℹ Le groupe doit contenir exactement 5 doctorants. Tous les champs sont obligatoires.</div>
-    <div class="members-grid">
-      <div class="member-card">
-        <div class="member-card-header"><div class="member-badge">1</div><span class="member-label">Doctorant 1</span><span class="member-req">obligatoire</span></div>
-        <div class="field" style="margin-bottom:0.75rem"><label>Nom complet <span class="req">*</span></label><input type="text" id="m1_nom" placeholder="Nom et prénom" /><div class="field-error" id="err-m1_nom">Champ requis.</div></div>
-        <div class="field" style="margin-bottom:0"><label>CNE <span class="req">*</span></label><input type="text" id="m1_cne" placeholder="G123456789" /><div class="field-error" id="err-m1_cne">Champ requis.</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-card-header"><div class="member-badge">2</div><span class="member-label">Doctorant 2</span><span class="member-req">obligatoire</span></div>
-        <div class="field" style="margin-bottom:0.75rem"><label>Nom complet <span class="req">*</span></label><input type="text" id="m2_nom" placeholder="Nom et prénom" /><div class="field-error" id="err-m2_nom">Champ requis.</div></div>
-        <div class="field" style="margin-bottom:0"><label>CNE <span class="req">*</span></label><input type="text" id="m2_cne" placeholder="G123456789" /><div class="field-error" id="err-m2_cne">Champ requis.</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-card-header"><div class="member-badge">3</div><span class="member-label">Doctorant 3</span><span class="member-req">obligatoire</span></div>
-        <div class="field" style="margin-bottom:0.75rem"><label>Nom complet <span class="req">*</span></label><input type="text" id="m3_nom" placeholder="Nom et prénom" /><div class="field-error" id="err-m3_nom">Champ requis.</div></div>
-        <div class="field" style="margin-bottom:0"><label>CNE <span class="req">*</span></label><input type="text" id="m3_cne" placeholder="G123456789" /><div class="field-error" id="err-m3_cne">Champ requis.</div></div>
-      </div>
-      <div class="member-card">
-        <div class="member-card-header"><div class="member-badge">4</div><span class="member-label">Doctorant 4</span><span class="member-req">obligatoire</span></div>
-        <div class="field" style="margin-bottom:0.75rem"><label>Nom complet <span class="req">*</span></label><input type="text" id="m4_nom" placeholder="Nom et prénom" /><div class="field-error" id="err-m4_nom">Champ requis.</div></div>
-        <div class="field" style="margin-bottom:0"><label>CNE <span class="req">*</span></label><input type="text" id="m4_cne" placeholder="G123456789" /><div class="field-error" id="err-m4_cne">Champ requis.</div></div>
-      </div>
-      <div class="member-card" style="grid-column:1/-1;max-width:calc(50% - 0.5rem)">
-        <div class="member-card-header"><div class="member-badge">5</div><span class="member-label">Doctorant 5</span><span class="member-req">obligatoire</span></div>
-        <div class="field" style="margin-bottom:0.75rem"><label>Nom complet <span class="req">*</span></label><input type="text" id="m5_nom" placeholder="Nom et prénom" /><div class="field-error" id="err-m5_nom">Champ requis.</div></div>
-        <div class="field" style="margin-bottom:0"><label>CNE <span class="req">*</span></label><input type="text" id="m5_cne" placeholder="G123456789" /><div class="field-error" id="err-m5_cne">Champ requis.</div></div>
-      </div>
-    </div>
-    <div class="nav-row"><button class="btn btn-ghost" onclick="goTo(1)">← Retour</button><button class="btn btn-primary" onclick="goTo(3)">Suivant →</button></div>
-  </div>
-
-  <!-- ══ SECTION 3 : Présentation ══ -->
-  <div class="section" id="sec3">
-    <div class="section-header"><span class="section-num">03 / 05</span><h2 class="section-title">Présentation</h2></div>
-    <div class="field">
-      <label>Titre du projet <span class="req">*</span></label>
-      <input type="text" id="titre_projet" placeholder="Titre complet de votre projet de recherche" />
-      <div class="field-error" id="err-titre_projet">Ce champ est obligatoire.</div>
-    </div>
-    <div class="field">
-      <label>Nom du présentateur <span class="req">*</span></label>
-      <select id="presentateur"><option value="">— Sélectionner parmi les membres du groupe —</option></select>
-      <div class="field-hint">Doit être l'un des 5 membres. Un seul présentateur autorisé.</div>
-      <div class="field-error" id="err-presentateur">Veuillez sélectionner un présentateur.</div>
-    </div>
-    <div class="nav-row"><button class="btn btn-ghost" onclick="goTo(2)">← Retour</button><button class="btn btn-primary" onclick="goTo(4)">Suivant →</button></div>
-  </div>
-
-  <!-- ══ SECTION 4 : Dates ══ -->
-  <div class="section" id="sec4">
-    <div class="section-header"><span class="section-num">04 / 05</span><h2 class="section-title">Choix des dates</h2></div>
-    <div class="notice">ℹ Votre choix actuel est affiché en vert. Vous pouvez le modifier si des places sont disponibles.</div>
-    <div class="notice-warn" id="warn-date-full" style="display:none">⚠ Votre date actuelle est complète. Vous devez choisir une autre date ou rester en liste d'attente.</div>
-
-    <div class="field" style="margin-bottom:1.75rem">
-      <label>1<sup>er</sup> choix <span class="req">*</span></label>
-      <div class="date-options" id="date-opts-1">
-        <div class="date-opt" data-date="13/06/2026" onclick="selectDate(this,1)"><div class="date-day">13</div><div class="date-month">Juin 2026</div><div class="date-spots" id="spots-13">—</div></div>
-        <div class="date-opt" data-date="20/06/2026" onclick="selectDate(this,1)"><div class="date-day">20</div><div class="date-month">Juin 2026</div><div class="date-spots" id="spots-20">—</div></div>
-        <div class="date-opt" data-date="27/06/2026" onclick="selectDate(this,1)"><div class="date-day">27</div><div class="date-month">Juin 2026</div><div class="date-spots" id="spots-27">—</div></div>
-      </div>
-      <div class="date-legend">
-        <span class="legend-item"><span class="legend-swatch first"></span>1er choix</span>
-        <span class="legend-item"><span class="legend-swatch second"></span>2e choix</span>
-      </div>
-      <div class="field-error" id="err-date1">Veuillez sélectionner votre 1er choix.</div>
-    </div>
-    <div class="field">
-      <label>2<sup>ème</sup> choix <span class="req">*</span></label>
-      <div class="date-options" id="date-opts-2">
-        <div class="date-opt" data-date="13/06/2026" onclick="selectDate(this,2)"><div class="date-day">13</div><div class="date-month">Juin 2026</div></div>
-        <div class="date-opt" data-date="20/06/2026" onclick="selectDate(this,2)"><div class="date-day">20</div><div class="date-month">Juin 2026</div></div>
-        <div class="date-opt" data-date="27/06/2026" onclick="selectDate(this,2)"><div class="date-day">27</div><div class="date-month">Juin 2026</div></div>
-      </div>
-      <div class="field-error" id="err-date2">Le 2ème choix doit être différent du 1er.</div>
-    </div>
-    <div class="nav-row"><button class="btn btn-ghost" onclick="goTo(3)">← Retour</button><button class="btn btn-primary" onclick="goTo(5)">Suivant →</button></div>
-  </div>
-
-  <!-- ══ SECTION 5 : Confirmation ══ -->
-  <div class="section" id="sec5">
-    <div class="section-header"><span class="section-num">05 / 05</span><h2 class="section-title">Confirmer les modifications</h2></div>
-    <div class="notice-warn">✎ Vérifiez attentivement les champs modifiés (marqués en orange) avant de valider.</div>
-
-    <div class="recap-box" id="recap-modif">
-      <div class="recap-label">Récapitulatif des modifications</div>
-      <div class="recap-row"><span class="recap-key">Groupe</span><span class="recap-val" id="rc-groupe">—</span></div>
-      <div class="recap-row"><span class="recap-key">Responsable</span><span class="recap-val" id="rc-resp">—</span></div>
-      <div class="recap-row"><span class="recap-key">Membres</span><span class="recap-val" id="rc-membres">—</span></div>
-      <div class="recap-row"><span class="recap-key">Projet</span><span class="recap-val" id="rc-projet">—</span></div>
-      <div class="recap-row"><span class="recap-key">Présentateur</span><span class="recap-val" id="rc-pres">—</span></div>
-      <div class="recap-row"><span class="recap-key">1er choix</span><span class="recap-val" id="rc-d1">—</span></div>
-      <div class="recap-row"><span class="recap-key">2ème choix</span><span class="recap-val" id="rc-d2">—</span></div>
-    </div>
-
-    <div class="field">
-      <label style="display:flex;gap:0.6rem;align-items:flex-start;cursor:pointer;text-transform:none;letter-spacing:0;font-size:13px;font-weight:400;color:var(--ink)">
-        <input type="checkbox" id="confirm_modif" style="width:auto;height:auto;flex-shrink:0;margin-top:3px" />
-        J'atteste que les informations modifiées sont exactes et que mon groupe est composé de 5 doctorants.
-      </label>
-      <div class="field-error" id="err-confirm">Vous devez cocher cette case.</div>
-    </div>
-
-    <div class="error-banner" id="error-banner"></div>
-
-    <div class="nav-row">
-      <button class="btn btn-ghost" onclick="goTo(4)">← Retour</button>
-      <button class="btn btn-warn" id="submit-btn" onclick="submitModification()">Enregistrer les modifications ✓</button>
-    </div>
-  </div>
-
-  <!-- ══ CHARGEMENT ENVOI ══ -->
+  <!-- LOADING STATE -->
   <div class="submitting-overlay" id="submitting">
     <div class="spinner"></div>
-    <p style="color:var(--muted);font-size:14px">Mise à jour en cours…</p>
+    <div class="submitting-label" id="submitting-label">Envoi en cours…</div>
   </div>
 
-  <!-- ══ SUCCÈS ══ -->
-  <div class="success-screen" id="success">
-    <div class="success-icon">✓</div>
-    <h2>Modifications enregistrées</h2>
-    <p>Les informations de votre groupe ont été mises à jour avec succès dans Google Sheets.</p>
-    <div class="recap-box" id="final-recap" style="max-width:480px;margin:0 auto 1.5rem;text-align:left"></div>
-    <p style="font-size:12px;color:var(--muted);font-family:'IBM Plex Mono',monospace">ID : <span id="final-id"></span></p>
+  <!-- SUCCESS STATE -->
+  <div class="success-panel" id="success">
+    <div class="success-check">✓</div>
+    <div class="success-title">Dépôt confirmé</div>
+    <div class="success-sub">Votre fichier a été enregistré avec succès. Un e-mail de confirmation vous a été envoyé.</div>
+    <table class="recap-table" id="success-recap"></table>
+    <a href="#" id="drive-link" class="success-link" target="_blank" rel="noopener">
+      Consulter le fichier sur Google Drive →
+    </a>
   </div>
 
-</div><!-- /.form-wrap -->
+</main>
 
+<footer>Portail de Dépôt — Présentations Doctorales 2026 — Usage interne uniquement</footer>
+
+<!-- ── JAVASCRIPT ── -->
 <script>
-// ════════════════════════════════════════════════════════
-// ⚠ REMPLACEZ CETTE URL par celle de votre déploiement
-// ════════════════════════════════════════════════════════
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbye5mqQ8o9_E2WiX3idhkY3tXJSZskRYcz7eXI3KbS-eAXgSNkPErEXDeuNDB58_9wisg/exec";
+// ============================================================
+//  ⚠️  Remplacer par l'URL de la Web App Apps Script déployée
+// ============================================================
+const APPS_SCRIPT_URL = "VOTRE_URL_APPS_SCRIPT_ICI";
 
-let current = 1;
-let choice1 = '', choice2 = '';
-const MAX = 16;
-let serverCounts = { "13/06/2026": 0, "20/06/2026": 0, "27/06/2026": 0 };
-let originalData = {};   // données chargées depuis Sheets
-let currentIdGroupe = '';
+// ── STATE ────────────────────────────────────────────────────
+let groupsData   = [];
+let selectedFile = null;
+let isSubmitting = false;
 
-// ────────────────────────────────────────────────────────
-// CHARGEMENT DES PLACES (même logique que l'inscription)
-// ────────────────────────────────────────────────────────
-window.addEventListener('load', loadCounts);
+// ── DOM ──────────────────────────────────────────────────────
+const skeletonEl     = document.getElementById("group-skeleton");
+const groupSelectEl  = document.getElementById("group-select");
+const groupBadgeEl   = document.getElementById("group-badge");
+const errGroupEl     = document.getElementById("err-group");
+const dropZoneEl     = document.getElementById("drop-zone");
+const fileInputEl    = document.getElementById("file-input");
+const filePreviewEl  = document.getElementById("file-preview");
+const previewNameEl  = document.getElementById("preview-name");
+const previewSizeEl  = document.getElementById("preview-size");
+const removeFileBtn  = document.getElementById("remove-file");
+const errFileEl      = document.getElementById("err-file");
+const progressWrap   = document.getElementById("progress-wrap");
+const progressFill   = document.getElementById("progress-fill");
+const progressLabel  = document.getElementById("progress-label");
+const progressPct    = document.getElementById("progress-pct");
+const submitBtn      = document.getElementById("submit-btn");
+const alertError     = document.getElementById("alert-error");
+const alertInfo      = document.getElementById("alert-info");
+const formArea       = document.getElementById("form-area");
+const submittingEl   = document.getElementById("submitting");
+const submittingLbl  = document.getElementById("submitting-label");
+const successEl      = document.getElementById("success");
+const successRecap   = document.getElementById("success-recap");
+const driveLinkEl    = document.getElementById("drive-link");
 
-async function loadCounts() {
-  try {
-    const res = await fetch(SCRIPT_URL, { method: 'GET' });
-    const data = await res.json();
-    serverCounts = data.counts || serverCounts;
-    updateSpots(data.counts || {}, data.full || {});
-    applyFullDates(data.full || {});
-  } catch (e) { /* silencieux */ }
-}
-
-function updateSpots(counts, full) {
-  const map = { "13/06/2026":"spots-13","20/06/2026":"spots-20","27/06/2026":"spots-27" };
-  Object.entries(map).forEach(([date, id]) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.textContent = full[date] ? "Complet" : `${MAX - (counts[date]||0)} place(s)`;
-    if (full[date]) el.style.color = "#8b1a1a";
+// ── INIT ─────────────────────────────────────────────────────
+document.addEventListener("DOMContentLoaded", () => {
+  loadGroups();
+  groupSelectEl.addEventListener("change", onGroupChange);
+  setupDropZone();
+  fileInputEl.addEventListener("change", () => {
+    if (fileInputEl.files[0]) processFile(fileInputEl.files[0]);
   });
-}
+  removeFileBtn.addEventListener("click", clearFile);
+  submitBtn.addEventListener("click", handleSubmit);
+});
 
-function applyFullDates(full) {
-  document.querySelectorAll('.date-opt').forEach(opt => {
-    if (full[opt.dataset.date]) {
-      opt.classList.add('disabled');
-      if (!opt.querySelector('.date-badge.full-badge')) {
-        const b = document.createElement('div');
-        b.className = 'date-badge full-badge'; b.textContent = 'Complet';
-        opt.appendChild(b);
-      }
-    }
-  });
-}
-
-// ────────────────────────────────────────────────────────
-// ÉTAPE 0 : CHARGEMENT DU GROUPE VIA SON ID
-// ────────────────────────────────────────────────────────
-async function loadGroupe() {
-  const idInput = document.getElementById('input-id');
-  const idVal = idInput.value.trim().toUpperCase();
-  const errEl = document.getElementById('id-error');
-  const loadingEl = document.getElementById('loading-id');
-  const btn = document.getElementById('btn-load');
-
-  errEl.style.display = 'none';
-  idInput.classList.remove('error');
-
-  if (!idVal || !idVal.startsWith('GRP-')) {
-    idInput.classList.add('error');
-    errEl.textContent = 'Format invalide. L\'identifiant doit commencer par GRP-';
-    errEl.style.display = 'block';
-    return;
-  }
-
-  btn.disabled = true;
-  loadingEl.style.display = 'block';
-
+// ── LOAD GROUPS ───────────────────────────────────────────────
+async function loadGroups() {
   try {
-    const res = await fetch(`${SCRIPT_URL}?id=${encodeURIComponent(idVal)}`, { method: 'GET' });
-    const result = await res.json();
-
-    loadingEl.style.display = 'none';
-    btn.disabled = false;
-
-    if (!result.success || !result.data) {
-      idInput.classList.add('error');
-      errEl.textContent = result.message || 'Identifiant introuvable. Vérifiez votre e-mail de confirmation.';
-      errEl.style.display = 'block';
-      return;
-    }
-
-    // Données chargées avec succès
-    currentIdGroupe = idVal;
-    originalData = result.data;
-    preFillForm(result.data);
-
+    const res  = await fetch(APPS_SCRIPT_URL, { method: "GET", redirect: "follow" });
+    const json = await res.json();
+    if (!json.success) throw new Error(json.error || "Erreur de chargement.");
+    groupsData = json.groups;
+    populateSelect(groupsData);
   } catch (err) {
-    loadingEl.style.display = 'none';
-    btn.disabled = false;
-    idInput.classList.add('error');
-    errEl.textContent = 'Erreur réseau : ' + err.message;
-    errEl.style.display = 'block';
+    skeletonEl.style.display = "none";
+    groupSelectEl.style.display = "block";
+    showAlert("error", "Impossible de charger les groupes : " + err.message);
   }
 }
 
-// ────────────────────────────────────────────────────────
-// PRÉ-REMPLISSAGE DU FORMULAIRE avec les données existantes
-// ────────────────────────────────────────────────────────
-function preFillForm(data) {
-  // Masquer la porte d'entrée
-  document.getElementById('id-gate').style.display = 'none';
+function populateSelect(groups) {
+  skeletonEl.style.display    = "none";
+  groupSelectEl.style.display = "block";
 
-  // Afficher le badge identité
-  const gi = document.getElementById('group-identity');
-  gi.classList.add('visible');
-  document.getElementById('gi-id').textContent = data.id_groupe;
-  document.getElementById('gi-name').textContent = data.nom_groupe;
-  document.getElementById('gi-status').textContent = data.statut;
-
-  // Afficher la barre de progression
-  document.getElementById('progress-track').classList.add('visible');
-
-  // Champs non modifiables
-  document.getElementById('ro-nom-groupe').innerHTML =
-    data.nom_groupe + '<span class="field-readonly-label">non modifiable</span>';
-  document.getElementById('ro-horodatage').innerHTML =
-    (data.horodatage || '—') + '<span class="field-readonly-label">non modifiable</span>';
-
-  // Section 1
-  document.getElementById('nom_resp').value   = data.nom_resp   || '';
-  document.getElementById('email_resp').value = data.email_resp || '';
-
-  // Section 2 — membres
-  ['m1','m2','m3','m4','m5'].forEach(m => {
-    document.getElementById(m+'_nom').value = data[m+'_nom'] || '';
-    document.getElementById(m+'_cne').value = data[m+'_cne'] || '';
+  groups.forEach(g => {
+    const opt      = document.createElement("option");
+    opt.value      = g.groupId;
+    const uploaded = g.status === "Uploaded";
+    opt.textContent = uploaded
+      ? `${g.groupId} — ${g.nomResp}  ✓ Déposé`
+      : `${g.groupId} — ${g.nomResp}`;
+    opt.disabled = uploaded;
+    groupSelectEl.appendChild(opt);
   });
+}
 
-  // Section 3
-  document.getElementById('titre_projet').value = data.titre_projet || '';
-  populatePresentateur();
-  document.getElementById('presentateur').value = data.presentateur || '';
+function onGroupChange() {
+  clearAlerts();
+  errGroupEl.style.display = "none";
 
-  // Section 4 — dates
-  choice1 = data.date1 || '';
-  choice2 = data.date2 || '';
+  const gid   = groupSelectEl.value;
+  const group = groupsData.find(g => g.groupId === gid);
 
-  // Marquer les dates actuelles
-  if (choice1) {
-    const opt = document.querySelector(`#date-opts-1 [data-date="${choice1}"]`);
-    if (opt && !opt.classList.contains('disabled')) {
-      opt.classList.add('selected-first');
-      const b = document.createElement('div');
-      b.className = 'date-badge first'; b.textContent = '1er choix';
-      opt.appendChild(b);
+  if (group) {
+    groupBadgeEl.classList.add("visible");
+    if (group.status === "Uploaded") {
+      groupBadgeEl.innerHTML =
+        `<strong>${group.groupId}</strong> — ${group.nomResp}<br>
+         ⚠️ Ce groupe a déjà soumis un fichier. Le dépôt est verrouillé.`;
+    } else {
+      groupBadgeEl.innerHTML =
+        `<strong>${group.groupId}</strong> — ${group.nomResp}
+         ${group.email ? `&lt;${group.email}&gt;` : ""}<br>
+         ✅ Prêt pour le dépôt.`;
     }
-  }
-  if (choice2) {
-    const opt = document.querySelector(`#date-opts-2 [data-date="${choice2}"]`);
-    if (opt) {
-      opt.classList.add('selected-second');
-      const b = document.createElement('div');
-      b.className = 'date-badge second'; b.textContent = '2e choix';
-      opt.appendChild(b);
-    }
-  }
-
-  // Activer la section 1
-  document.getElementById('sec1').classList.add('active');
-  goToStep(1);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ────────────────────────────────────────────────────────
-// NAVIGATION ENTRE SECTIONS
-// ────────────────────────────────────────────────────────
-function goTo(n) {
-  if (n > current && !validate(current)) return;
-  if (n === 3) populatePresentateur();
-  if (n === 5) updateRecap();
-  document.getElementById('sec'+current).classList.remove('active');
-  document.getElementById('sec'+n).classList.add('active');
-  goToStep(n);
-  current = n;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function goToStep(n) {
-  for (let i = 1; i <= 5; i++) {
-    const num = document.getElementById('step-n'+i);
-    const lbl = document.getElementById('step-l'+i);
-    if (!num || !lbl) continue;
-    num.className = 'step-num' + (i < n ? ' done' : i === n ? ' active' : '');
-    lbl.className = 'step-label' + (i === n ? ' active' : '');
-    num.textContent = i < n ? '✓' : i;
-  }
-}
-
-// ────────────────────────────────────────────────────────
-// VALIDATION
-// ────────────────────────────────────────────────────────
-function validate(sec) {
-  let ok = true;
-  const req = (id, check) => {
-    const el = document.getElementById(id);
-    const err = document.getElementById('err-'+id);
-    if (!el || !err) return;
-    const pass = check ? check(el.value) : el.value.trim() !== '';
-    el.classList.toggle('error', !pass);
-    err.style.display = pass ? 'none' : 'block';
-    if (!pass) ok = false;
-  };
-  if (sec === 1) { req('nom_resp'); req('email_resp', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)); }
-  if (sec === 2) { ['m1','m2','m3','m4','m5'].forEach(m => { req(m+'_nom'); req(m+'_cne'); }); }
-  if (sec === 3) { req('titre_projet'); req('presentateur', v => v !== ''); }
-  if (sec === 4) {
-    const e1 = document.getElementById('err-date1');
-    const e2 = document.getElementById('err-date2');
-    if (!choice1) { e1.style.display = 'block'; ok = false; } else { e1.style.display = 'none'; }
-    if (!choice2 || choice2 === choice1) { e2.style.display = 'block'; ok = false; } else { e2.style.display = 'none'; }
-  }
-  return ok;
-}
-
-// ────────────────────────────────────────────────────────
-// SÉLECTION DES DATES
-// ────────────────────────────────────────────────────────
-function selectDate(el, choice) {
-  if (el.classList.contains('disabled')) return;
-  const date = el.dataset.date;
-  if (choice === 1) {
-    choice1 = date;
-    document.querySelectorAll('#date-opts-1 .date-opt').forEach(o => {
-      o.classList.remove('selected-first');
-      const b = o.querySelector('.date-badge.first');
-      if (b) b.remove();
-    });
-    el.classList.add('selected-first');
-    const b = document.createElement('div'); b.className = 'date-badge first'; b.textContent = '1er choix';
-    el.appendChild(b);
-    // Désactiver la même date dans le 2e choix
-    document.querySelectorAll('#date-opts-2 .date-opt').forEach(o => {
-      if (o.dataset.date === date) {
-        o.classList.add('disabled');
-        if (choice2 === date) { choice2 = ''; o.classList.remove('selected-second'); const b2 = o.querySelector('.date-badge.second'); if (b2) b2.remove(); }
-      } else if (!serverCounts[o.dataset.date] || serverCounts[o.dataset.date] < MAX) {
-        o.classList.remove('disabled');
-      }
-    });
   } else {
-    if (date === choice1) return;
-    choice2 = date;
-    document.querySelectorAll('#date-opts-2 .date-opt').forEach(o => {
-      o.classList.remove('selected-second');
-      const b = o.querySelector('.date-badge.second');
-      if (b) b.remove();
-    });
-    el.classList.add('selected-second');
-    const b = document.createElement('div'); b.className = 'date-badge second'; b.textContent = '2e choix';
-    el.appendChild(b);
+    groupBadgeEl.classList.remove("visible");
   }
+
+  updateSubmitState();
 }
 
-// ────────────────────────────────────────────────────────
-// MISE À JOUR DU SELECT PRÉSENTATEUR
-// ────────────────────────────────────────────────────────
-function populatePresentateur() {
-  const sel = document.getElementById('presentateur');
-  const prev = sel.value;
-  sel.innerHTML = '<option value="">— Sélectionner parmi les membres du groupe —</option>';
-  ['m1','m2','m3','m4','m5'].forEach(m => {
-    const n = document.getElementById(m+'_nom').value.trim();
-    if (n) {
-      const o = document.createElement('option');
-      o.value = n; o.textContent = n;
-      if (n === prev) o.selected = true;
-      sel.appendChild(o);
-    }
+// ── DRAG & DROP ───────────────────────────────────────────────
+function setupDropZone() {
+  dropZoneEl.addEventListener("dragover", e => {
+    e.preventDefault();
+    dropZoneEl.classList.add("dragover");
+  });
+  dropZoneEl.addEventListener("dragleave", () => dropZoneEl.classList.remove("dragover"));
+  dropZoneEl.addEventListener("drop", e => {
+    e.preventDefault();
+    dropZoneEl.classList.remove("dragover");
+    if (e.dataTransfer.files[0]) processFile(e.dataTransfer.files[0]);
   });
 }
 
-// ────────────────────────────────────────────────────────
-// RÉCAPITULATIF avec détection des changements
-// ────────────────────────────────────────────────────────
-function updateRecap() {
-  const members = ['m1','m2','m3','m4','m5']
-    .map(m => document.getElementById(m+'_nom').value.trim())
-    .filter(Boolean).join(', ');
+const ALLOWED_EXTS  = ["pdf","ppt","pptx","doc","docx"];
+const ALLOWED_MIMES = [
+  "application/pdf",
+  "application/vnd.ms-powerpoint",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+];
 
-  const fields = {
-    'rc-groupe':  { val: originalData.nom_groupe, cur: originalData.nom_groupe },
-    'rc-resp':    { val: document.getElementById('nom_resp').value,        orig: originalData.nom_resp },
-    'rc-membres': { val: members,                                           orig: ['m1','m2','m3','m4','m5'].map(m=>originalData[m+'_nom']).filter(Boolean).join(', ') },
-    'rc-projet':  { val: document.getElementById('titre_projet').value,    orig: originalData.titre_projet },
-    'rc-pres':    { val: document.getElementById('presentateur').value,    orig: originalData.presentateur },
-    'rc-d1':      { val: choice1,                                          orig: originalData.date1 },
-    'rc-d2':      { val: choice2,                                          orig: originalData.date2 },
-  };
+function processFile(file) {
+  clearAlerts();
+  errFileEl.style.display = "none";
 
-  for (const [id, f] of Object.entries(fields)) {
-    const el = document.getElementById(id);
-    if (!el) continue;
-    const changed = f.orig !== undefined && f.val !== f.orig;
-    el.textContent = f.val || '—';
-    el.className = 'recap-val' + (changed ? ' changed' : '');
-    // Ajouter badge "modifié"
-    if (changed) {
-      const pill = document.createElement('span');
-      pill.className = 'diff-pill'; pill.textContent = 'modifié';
-      el.appendChild(pill);
-    }
+  const ext = file.name.split(".").pop().toLowerCase();
+  if (!ALLOWED_EXTS.includes(ext)) {
+    errFileEl.textContent = `Format non autorisé. Acceptés : ${ALLOWED_EXTS.join(", ").toUpperCase()}`;
+    errFileEl.style.display = "block";
+    return;
   }
+  if (file.size > 10 * 1024 * 1024) {
+    errFileEl.textContent = "Le fichier dépasse la limite de 10 MB.";
+    errFileEl.style.display = "block";
+    return;
+  }
+
+  selectedFile = file;
+  previewNameEl.textContent = file.name;
+  previewSizeEl.textContent = formatBytes(file.size);
+  filePreviewEl.classList.add("visible");
+  updateSubmitState();
 }
 
-// ────────────────────────────────────────────────────────
-// SOUMISSION DE LA MODIFICATION
-// ────────────────────────────────────────────────────────
-async function submitModification() {
-  const cb = document.getElementById('confirm_modif');
-  const errCb = document.getElementById('err-confirm');
-  if (!cb.checked) { errCb.style.display = 'block'; return; }
-  errCb.style.display = 'none';
+function clearFile() {
+  selectedFile = null;
+  fileInputEl.value = "";
+  filePreviewEl.classList.remove("visible");
+  updateSubmitState();
+}
 
-  const payload = {
-    id_groupe:    currentIdGroupe,                              // ← clé UPDATE
-    nom_resp:     document.getElementById('nom_resp').value,
-    email_resp:   document.getElementById('email_resp').value,
-    m1_nom: document.getElementById('m1_nom').value, m1_cne: document.getElementById('m1_cne').value,
-    m2_nom: document.getElementById('m2_nom').value, m2_cne: document.getElementById('m2_cne').value,
-    m3_nom: document.getElementById('m3_nom').value, m3_cne: document.getElementById('m3_cne').value,
-    m4_nom: document.getElementById('m4_nom').value, m4_cne: document.getElementById('m4_cne').value,
-    m5_nom: document.getElementById('m5_nom').value, m5_cne: document.getElementById('m5_cne').value,
-    titre_projet: document.getElementById('titre_projet').value,
-    presentateur: document.getElementById('presentateur').value,
-    date1: choice1,
-    date2: choice2
-  };
+function formatBytes(b) {
+  if (b < 1024)         return b + " o";
+  if (b < 1024 * 1024)  return (b / 1024).toFixed(1) + " Ko";
+  return (b / (1024 * 1024)).toFixed(2) + " Mo";
+}
 
-  document.getElementById('sec5').classList.remove('active');
-  document.getElementById('submitting').style.display = 'block';
-  document.getElementById('error-banner').style.display = 'none';
+// ── SUBMIT ────────────────────────────────────────────────────
+function updateSubmitState() {
+  const gid   = groupSelectEl.value;
+  const group = groupsData.find(g => g.groupId === gid);
+  const ok    = gid && group && group.status !== "Uploaded" && selectedFile && !isSubmitting;
+  submitBtn.disabled = !ok;
+}
 
-  // ── Mode démo ──
-  if (SCRIPT_URL === "VOTRE_URL_APPS_SCRIPT_ICI") {
-    await new Promise(r => setTimeout(r, 1200));
-    showSuccess(payload);
+async function handleSubmit() {
+  clearAlerts();
+
+  const gid = groupSelectEl.value;
+  if (!gid)          { errGroupEl.style.display = "block"; return; }
+  if (!selectedFile) { errFileEl.textContent = "Veuillez choisir un fichier."; errFileEl.style.display = "block"; return; }
+
+  isSubmitting = true;
+  submitBtn.disabled = true;
+  formArea.style.display = "none";
+  submittingEl.classList.add("visible");
+
+  // Mode démo si URL non configurée
+  if (APPS_SCRIPT_URL === "VOTRE_URL_APPS_SCRIPT_ICI") {
+    await simulateProgress();
+    showSuccess({
+      groupId: gid,
+      nomResp: groupsData.find(g => g.groupId === gid)?.nomResp || "—",
+      fileName: selectedFile.name,
+      fileUrl: "#"
+    });
     return;
   }
 
   try {
-    const res = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
+    setSubmittingLabel("Lecture du fichier…");
+    const base64 = await fileToBase64(selectedFile);
+
+    setSubmittingLabel("Envoi vers le serveur…");
+    const payload = {
+      groupId : gid,
+      fileName: selectedFile.name,
+      mimeType: selectedFile.type || guessMime(selectedFile.name),
+      fileData: base64.split(",")[1]
+    };
+
+    const res  = await fetch(APPS_SCRIPT_URL, {
+      method  : "POST",
+      redirect: "follow",
+      headers : { "Content-Type": "text/plain" },
+      body    : JSON.stringify(payload)
     });
-    const result = await res.json();
+    const json = await res.json();
 
-    document.getElementById('submitting').style.display = 'none';
+    if (!json.success) throw new Error(json.error || "Erreur inconnue.");
 
-    if (!result.success) {
-      document.getElementById('sec5').classList.add('active');
-      const errBanner = document.getElementById('error-banner');
-      errBanner.textContent = '⚠ ' + (result.message || 'Erreur lors de la modification.');
-      errBanner.style.display = 'block';
-      return;
-    }
+    showSuccess({ groupId: gid, nomResp: groupsData.find(g=>g.groupId===gid)?.nomResp||"—", fileName: json.fileName, fileUrl: json.fileUrl });
 
-    showSuccess(payload);
+    // Mettre à jour le statut local
+    const g = groupsData.find(g => g.groupId === gid);
+    if (g) g.status = "Uploaded";
 
   } catch (err) {
-    document.getElementById('submitting').style.display = 'none';
-    document.getElementById('sec5').classList.add('active');
-    const errBanner = document.getElementById('error-banner');
-    errBanner.textContent = 'Erreur réseau : ' + err.message + '. Vérifiez votre connexion.';
-    errBanner.style.display = 'block';
+    submittingEl.classList.remove("visible");
+    formArea.style.display = "block";
+    showAlert("error", "❌ Erreur lors du dépôt : " + err.message);
+    submitBtn.disabled = false;
+    isSubmitting = false;
+    updateSubmitState();
   }
 }
 
-// ────────────────────────────────────────────────────────
-// ÉCRAN DE SUCCÈS
-// ────────────────────────────────────────────────────────
-function showSuccess(payload) {
-  document.getElementById('submitting').style.display = 'none';
-  document.getElementById('success').style.display = 'block';
-  document.getElementById('final-id').textContent = currentIdGroupe;
+function showSuccess(data) {
+  submittingEl.classList.remove("visible");
+  successEl.classList.add("visible");
 
-  const members = ['m1','m2','m3','m4','m5'].map((m, i) => `
-    <div class="recap-row"><span class="recap-key">Membre ${i+1}</span><span class="recap-val">${payload[m+'_nom']}</span></div>
-  `).join('');
-
-  document.getElementById('final-recap').innerHTML = `
-    <div class="recap-label">Données mises à jour</div>
-    <div class="recap-row"><span class="recap-key">Responsable</span><span class="recap-val">${payload.nom_resp}</span></div>
-    ${members}
-    <div class="recap-row"><span class="recap-key">Projet</span><span class="recap-val">${payload.titre_projet}</span></div>
-    <div class="recap-row"><span class="recap-key">Présentateur</span><span class="recap-val">${payload.presentateur}</span></div>
-    <div class="recap-row"><span class="recap-key">1er choix</span><span class="recap-val">${payload.date1}</span></div>
-    <div class="recap-row"><span class="recap-key">2ème choix</span><span class="recap-val">${payload.date2}</span></div>
-    <div class="recap-row"><span class="recap-key">Statut</span><span class="recap-val" style="color:#085041">Modification enregistrée ✓</span></div>
+  successRecap.innerHTML = `
+    <tr><td>Groupe</td><td>${data.groupId}</td></tr>
+    <tr><td>Responsable</td><td>${data.nomResp}</td></tr>
+    <tr><td>Fichier déposé</td><td>${data.fileName}</td></tr>
+    <tr><td>Statut</td><td style="color:var(--accent-light);font-weight:600">✓ Confirmé</td></tr>
   `;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  driveLinkEl.href = data.fileUrl;
+  if (data.fileUrl === "#") driveLinkEl.style.display = "none";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function setSubmittingLabel(txt) {
+  submittingLbl.textContent = txt;
+}
+
+// ── FILE → BASE64 ─────────────────────────────────────────────
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload  = () => resolve(r.result);
+    r.onerror = () => reject(new Error("Échec de lecture du fichier."));
+    r.readAsDataURL(file);
+  });
+}
+
+// Fallback MIME si le navigateur ne le détecte pas
+function guessMime(name) {
+  const ext = name.split(".").pop().toLowerCase();
+  const map = {
+    pdf : "application/pdf",
+    ppt : "application/vnd.ms-powerpoint",
+    pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    doc : "application/msword",
+    docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  };
+  return map[ext] || "application/octet-stream";
+}
+
+// ── DEMO SIMULATION ───────────────────────────────────────────
+async function simulateProgress() {
+  const steps = [
+    [30, "Lecture du fichier…"],
+    [60, "Encodage Base64…"],
+    [85, "Envoi vers Google Drive…"],
+    [100, "Finalisation…"]
+  ];
+  for (const [p, label] of steps) {
+    setSubmittingLabel(label);
+    await new Promise(r => setTimeout(r, 600));
+  }
+}
+
+// ── ALERTS ────────────────────────────────────────────────────
+function showAlert(type, html) {
+  const el = type === "error" ? alertError : alertInfo;
+  el.innerHTML = html;
+  el.classList.add("visible");
+}
+function clearAlerts() {
+  [alertError, alertInfo].forEach(el => {
+    el.classList.remove("visible");
+    el.innerHTML = "";
+  });
 }
 </script>
 </body>
